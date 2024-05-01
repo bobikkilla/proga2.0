@@ -1,6 +1,7 @@
 #include <stdio.h>
 
 char *s21_strstr(char *string, char *substring);
+int countString(char *haystack, char *needle);
 
 int main(int argc, char **argv) {
     printf("Program started\n");
@@ -12,9 +13,15 @@ int main(int argc, char **argv) {
         }
     }
     printf("Second part of program:\n");
+    
+    for(int i = 2; i < argc; i++) { // cycle for arg parsing
+        if(s21_strstr(argv[i], argv[1]) != NULL) {
+            printf("%s | Substr times in str: %d\n", argv[i], countString(argv[i], argv[1]));
+        }
+    }
+
     return 0;
 }
-
 
 char *s21_strstr(char *string, char *substring) {
     char *a, *b;
@@ -39,4 +46,14 @@ char *s21_strstr(char *string, char *substring) {
         b = substring;
     }
     return NULL;
+}
+
+int countString(char *substr, char *str) {
+    int count = 0;
+    char *tmp = substr;
+    while(tmp = s21_strstr(tmp, str)) {
+        count++;
+        tmp++;
+    }
+    return count;
 }
